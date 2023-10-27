@@ -2,7 +2,7 @@
 # Name - Indrajeet Mondal; Date = 25th October 2023
 # SourceCode
 
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for, request, redirect
 
 app = Flask(__name__)
 
@@ -31,6 +31,18 @@ def contact():
     return render_template("contact.html")
 
 
+# Dynamic page loading
+@app.route("/<string:page_name>")
+def html_page(page_name):
+    return render_template(page_name)
+
+
+# Submit a contact form
 @app.route("/submit_form", methods=["POST", "GET"])
 def submit_form():
-    return "Form submitted successfully."
+    if request.method == "POST":
+        data = request.form.to_dict()  # Change 'method' to 'request'
+        print(data)
+        return redirect("/thankyou.html")
+    else:
+        return "Something went wrong !!"
