@@ -29,3 +29,8 @@ def work():
 @app.route("/contact.html")
 def contact():
     return render_template("contact.html")
+
+
+@app.route("/submit_form", methods=["POST", "GET"])
+def submit_form():
+    return "Form submitted successfully."
